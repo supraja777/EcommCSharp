@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using repos.Models;
 namespace repos.Data
 {
     public class ApplicationDbContext : DbContext
@@ -7,5 +8,7 @@ namespace repos.Data
         {
                
         }
+
+        public DbSet<Category> Categories { get; set; }
     }
 }
