@@ -214,6 +214,9 @@ csx/
 ecf/
 rcf/
 
+
+
+
 # Windows Store app package directories and files
 AppPackages/
 BundleArtifacts/
@@ -361,3 +364,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+../.vs*
