@@ -1,21 +1,25 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using repos.Models;
-using repos.Data;
+using Bulky.DataAccess.Data;
+using Bulky.Models;
+using Bulky.DataAccess.Data;
+using Bulky.DataAccess.Repository.IRepository;
+using Bulky.DataAccess.Repository;
 
 namespace repos.Controllers;
 
 public class CategoryController : Controller
 {
-    private readonly ApplicationDbContext _db;
-    public CategoryController(ApplicationDbContext db)
+    private readonly IUnitOfWorkRepository _unitOfWork;
+ 
+    public CategoryController(IUnitOfWorkRepository unitOfWork)
     {
-        _db = db;
+        _unitOfWork = unitOfWork;
     }
 
     public IActionResult Index()
     {
-        List<Category> objCategoryList = _db.Categories.ToList();
+        List<Category> objCategoryList = _unitOfWork.Category.GetAll().ToList();
        
         return View(objCategoryList);
     }
@@ -37,8 +41,8 @@ public class CategoryController : Controller
 
         if (ModelState.IsValid)
         {
-            _db.Categories.Add(obj);
-            _db.SaveChanges();
+            _unitOfWork.Category.Add(obj);
+            _unitOfWork.Save();
             TempData["success"] = "Category created successfully";
             return RedirectToAction("Index");
         }
@@ -53,7 +57,7 @@ public class CategoryController : Controller
             return NotFound();
         }
 
-        Category? categoryFromDb = _db.Categories.Find(id);
+        Category? categoryFromDb = _unitOfWork.Category.Get(u => u.Id == id);
 
         if (categoryFromDb == null)
         {
@@ -69,8 +73,8 @@ public class CategoryController : Controller
 
         if (ModelState.IsValid)
         {
-            _db.Categories.Update(obj);
-            _db.SaveChanges();
+            _unitOfWork.Category.Update(obj);
+            _unitOfWork.Save();
             TempData["success"] = "Category edited successfully";
             return RedirectToAction("Index");
         }
@@ -88,7 +92,7 @@ public class CategoryController : Controller
             return NotFound();
         }
 
-        Category? categoryFromDb = _db.Categories.Find(id);
+        Category? categoryFromDb = _unitOfWork.Category.Get(u => u.Id == id);
 
         if (categoryFromDb == null)
         {
@@ -102,15 +106,15 @@ public class CategoryController : Controller
     public IActionResult DeletePOST(int id)
     {
 
-        Category? categoryFromDb = _db.Categories.Find(id);
+        Category? categoryFromDb = _unitOfWork.Category.Get(u => u.Id == id);
 
         if (categoryFromDb == null)
         {
             return NotFound();
         }
 
-        _db.Categories.Remove(categoryFromDb);
-        _db.SaveChanges();
+        _unitOfWork.Category.Remove(categoryFromDb);
+        _unitOfWork.Save();
         TempData["success"] = "Category deleted successfully";
         return RedirectToAction("Index");
     }
