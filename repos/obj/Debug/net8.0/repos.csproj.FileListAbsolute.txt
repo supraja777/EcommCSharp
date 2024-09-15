@@ -111,3 +111,4 @@ C:\Users\dell\source\repos\obj\Debug\net8.0\refint\repos.dll
 C:\Users\dell\source\repos\obj\Debug\net8.0\repos.pdb
 C:\Users\dell\source\repos\obj\Debug\net8.0\repos.genruntimeconfig.cache
 C:\Users\dell\source\repos\obj\Debug\net8.0\ref\repos.dll
+C:\Users\dell\source\repos\obj\Debug\net8.0\repos.MvcApplicationPartsAssemblyInfo.cs

@@ -7,6 +7,7 @@ using Bulky.DataAccess.Repository.IRepository;
 using Bulky.DataAccess.Repository;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
+using Bulky.Models.ViewModels;
 
 namespace repos.Areas.Admin.Controllers
 {
@@ -29,31 +30,40 @@ namespace repos.Areas.Admin.Controllers
 
         public IActionResult Create()
         {
-            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category.GetAll()
-            .Select(u => new SelectListItem
+
+            ProductVM productVM = new()
             {
-                Text = u.Name,
-                Value = u.Id.ToString()
-
-            });
-
-            ViewBag.CategoryList = CategoryList; // key value
+                Product = new Product(),
+                CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
+                })
+            };
+            
              
-            return View();
+            return View(productVM);
         }
 
         [HttpPost]
-        public IActionResult Create(Product obj)
+        public IActionResult Create(ProductVM ProductVM)
         {
             
             if (ModelState.IsValid)
             {
-                _unitOfWork.Product.Add(obj);
+                _unitOfWork.Product.Add(ProductVM.Product);
                 _unitOfWork.Save();
                 TempData["success"] = "Product created successfully";
                 return RedirectToAction("Index");
             }
-            return View();
+
+            ProductVM.CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
+            {
+                Text = u.Name,
+                Value = u.Id.ToString()
+            });
+
+            return View(ProductVM);
         }
 
         public IActionResult Edit(int? id)
