@@ -5,6 +5,8 @@ using Bulky.Models;
 using Bulky.DataAccess.Data;
 using Bulky.DataAccess.Repository.IRepository;
 using Bulky.DataAccess.Repository;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
 
 namespace repos.Areas.Admin.Controllers
 {
@@ -27,7 +29,16 @@ namespace repos.Areas.Admin.Controllers
 
         public IActionResult Create()
         {
+            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category.GetAll()
+            .Select(u => new SelectListItem
+            {
+                Text = u.Name,
+                Value = u.Id.ToString()
 
+            });
+
+            ViewBag.CategoryList = CategoryList; // key value
+             
             return View();
         }
 
