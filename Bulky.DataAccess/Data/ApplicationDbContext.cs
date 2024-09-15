@@ -32,7 +32,8 @@ namespace Bulky.DataAccess.Data
                     ListPrice = 123,
                     Price = 12,
                     Price50 = 23,
-                    Price100 = 22
+                    Price100 = 22,
+                    CategoryId = 3,
                 }
 
             );
