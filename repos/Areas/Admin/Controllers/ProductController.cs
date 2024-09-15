@@ -15,10 +15,12 @@ namespace repos.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         private readonly IUnitOfWorkRepository _unitOfWork;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ProductController(IUnitOfWorkRepository unitOfWork)
+        public ProductController(IUnitOfWorkRepository unitOfWork, IWebHostEnvironment webHostEnvironment)
         {
             _unitOfWork = unitOfWork;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public IActionResult Index()
@@ -28,10 +30,10 @@ namespace repos.Areas.Admin.Controllers
             return View(objProductList);
         }
 
-        public IActionResult Create()
+        public IActionResult Upsert(int? id)
         {
 
-            ProductVM productVM = new()
+            ProductVM ProductVM = new()
             {
                 Product = new Product(),
                 CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
@@ -41,16 +43,38 @@ namespace repos.Areas.Admin.Controllers
                 })
             };
             
-             
-            return View(productVM);
+            if (id == null || id == 0) { // create usecase
+                return View(ProductVM);
+            } else
+            {
+                ProductVM.Product = _unitOfWork.Product.Get(u => u.Id == id); // edit  usecase
+
+                return View(ProductVM);
+            }
         }
 
         [HttpPost]
-        public IActionResult Create(ProductVM ProductVM)
+        public IActionResult Upsert(ProductVM ProductVM, IFormFile? file)
         {
-            
             if (ModelState.IsValid)
             {
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+
+                if (file != null)
+                {
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    string productPath = Path.Combine(wwwRootPath, @"images\product");
+
+                    using (var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+
+                    ProductVM.Product.ImageUrl = @"\images\product\" + fileName;
+                }
+
+               
+
                 _unitOfWork.Product.Add(ProductVM.Product);
                 _unitOfWork.Save();
                 TempData["success"] = "Product created successfully";
@@ -64,39 +88,6 @@ namespace repos.Areas.Admin.Controllers
             });
 
             return View(ProductVM);
-        }
-
-        public IActionResult Edit(int? id)
-        {
-
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-
-            Product? productFromDb = _unitOfWork.Product.Get(u => u.Id == id);
-
-            if (productFromDb == null)
-            {
-                return NotFound();
-            }
-
-            return View(productFromDb);
-        }
-
-        [HttpPost]
-        public IActionResult Edit(Product obj)
-        {
-
-            if (ModelState.IsValid)
-            {
-                _unitOfWork.Product.Update(obj);
-                _unitOfWork.Save();
-                TempData["success"] = "Product edited successfully";
-                return RedirectToAction("Index");
-            }
-
-            return View();
         }
 
         public IActionResult Delete(int? id)
