@@ -6,11 +6,11 @@ a.navbar-brand[b-io0xyrzmsk] {
   text-align: center;
   word-break: break-all;
 }
-
-a[b-io0xyrzmsk] {
+/*
+a {
   color: #0077cc;
 }
-
+*/
 .btn-primary[b-io0xyrzmsk] {
   color: #fff;
   background-color: #1b6ec2;
