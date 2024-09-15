@@ -13,12 +13,12 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "C:\\Users\\dell\\source\\repos\\wwwroot\\images\\product\\192cc95a-125a-4afe-a30e-58ac0a721dd7.jpg",
-      "PackagePath": "staticwebassets\\images\\product\\192cc95a-125a-4afe-a30e-58ac0a721dd7.jpg"
-    },
-    {
       "Id": "C:\\Users\\dell\\source\\repos\\wwwroot\\images\\product\\1c79b2de-ad09-40be-b037-96065c6a6a7c.pdf",
       "PackagePath": "staticwebassets\\images\\product\\1c79b2de-ad09-40be-b037-96065c6a6a7c.pdf"
+    },
+    {
+      "Id": "C:\\Users\\dell\\source\\repos\\wwwroot\\images\\product\\c519d877-4457-425d-8157-d357bf337216.jpeg",
+      "PackagePath": "staticwebassets\\images\\product\\c519d877-4457-425d-8157-d357bf337216.jpeg"
     },
     {
       "Id": "C:\\Users\\dell\\source\\repos\\wwwroot\\js\\site.js",

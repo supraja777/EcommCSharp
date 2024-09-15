@@ -25,7 +25,7 @@ namespace repos.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            List<Product> objProductList = _unitOfWork.Product.GetAll().ToList();
+            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
 
             return View(objProductList);
         }
@@ -65,6 +65,16 @@ namespace repos.Areas.Admin.Controllers
                     string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                     string productPath = Path.Combine(wwwRootPath, @"images\product");
 
+                    if (ProductVM.Product.ImageUrl != null) {
+                        // delete old image
+                        var oldImagePath = Path.Combine(wwwRootPath, ProductVM.Product.ImageUrl.Trim('\\'));
+
+                        if (System.IO.File.Exists(oldImagePath)) {
+                            System.IO.File.Delete(oldImagePath);
+                        }
+
+                    }
+
                     using (var fileStream = new FileStream(Path.Combine(productPath, fileName), FileMode.Create))
                     {
                         file.CopyTo(fileStream);
@@ -74,8 +84,14 @@ namespace repos.Areas.Admin.Controllers
                 }
 
                
-
-                _unitOfWork.Product.Add(ProductVM.Product);
+                 if (ProductVM.Product.Id == 0)  // create
+                 {   
+                    _unitOfWork.Product.Add(ProductVM.Product);
+                 } else
+                {
+                    _unitOfWork.Product.Update(ProductVM.Product);  
+                }
+                
                 _unitOfWork.Save();
                 TempData["success"] = "Product created successfully";
                 return RedirectToAction("Index");
