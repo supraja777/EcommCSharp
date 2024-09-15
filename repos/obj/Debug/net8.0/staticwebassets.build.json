@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "aVMGi4uhucETFkmE9uaDCTRmGzqUOqgxrlv2JdPwaW8=",
+  "Hash": "qSIv6E+Ivg1LQukRXgP1vbws7xNPZVm7nAdqnt9NQOY=",
   "Source": "repos",
   "BasePath": "_content/repos",
   "Mode": "Default",
@@ -93,25 +93,6 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
-      "Identity": "C:\\Users\\dell\\source\\repos\\wwwroot\\images\\product\\1c79b2de-ad09-40be-b037-96065c6a6a7c.pdf",
-      "SourceId": "repos",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\dell\\source\\repos\\wwwroot\\",
-      "BasePath": "_content/repos",
-      "RelativePath": "images/product/1c79b2de-ad09-40be-b037-96065c6a6a7c.pdf",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\product\\1c79b2de-ad09-40be-b037-96065c6a6a7c.pdf"
-    },
-    {
       "Identity": "C:\\Users\\dell\\source\\repos\\wwwroot\\images\\product\\c519d877-4457-425d-8157-d357bf337216.jpeg",
       "SourceId": "repos",
       "SourceType": "Discovered",
@@ -129,6 +110,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\product\\c519d877-4457-425d-8157-d357bf337216.jpeg"
+    },
+    {
+      "Identity": "C:\\Users\\dell\\source\\repos\\wwwroot\\js\\product.js",
+      "SourceId": "repos",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\dell\\source\\repos\\wwwroot\\",
+      "BasePath": "_content/repos",
+      "RelativePath": "js/product.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\product.js"
     },
     {
       "Identity": "C:\\Users\\dell\\source\\repos\\wwwroot\\js\\site.js",
