@@ -2,6 +2,9 @@ using Microsoft.EntityFrameworkCore;
 using Bulky.DataAccess.Data;
 using Bulky.DataAccess.Repository;
 using Bulky.DataAccess.Repository.IRepository;
+using Microsoft.AspNetCore.Identity;
+using Bulky.Utility;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -9,7 +12,13 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options => 
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
+
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 builder.Services.AddScoped<IUnitOfWorkRepository, UnitOfWork>();
+builder.Services.AddScoped<IEmailSender, EmailSender>();
+
+builder.Services.AddRazorPages();
+
 
 var app = builder.Build();
 
@@ -26,7 +35,10 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication(); // should always be before authorization
 app.UseAuthorization();
+
+app.MapRazorPages();
 
 app.MapControllerRoute(
     name: "default",
