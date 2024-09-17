@@ -2,13 +2,15 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Bulky.DataAccess.Data;
 using Bulky.Models;
-using Bulky.DataAccess.Data;
 using Bulky.DataAccess.Repository.IRepository;
 using Bulky.DataAccess.Repository;
+using Bulky.Utility;
+using Microsoft.AspNetCore.Authorization;
 
 namespace repos.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWorkRepository _unitOfWork;
