@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "NPMuuSPTBamoFRJInX0kkkUWX61LeDABQnt+8pf7VCo=",
+  "Hash": "P9/961xRwVCszgJWrsr7TGmm3O78lWuUIrv477ym5DY=",
   "Source": "repos",
   "BasePath": "_content/repos",
   "Mode": "Default",
@@ -1231,6 +1231,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\dell\\source\\repos\\wwwroot\\js\\company.js",
+      "SourceId": "repos",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\dell\\source\\repos\\wwwroot\\",
+      "BasePath": "_content/repos",
+      "RelativePath": "js/company.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\company.js"
     },
     {
       "Identity": "C:\\Users\\dell\\source\\repos\\wwwroot\\js\\product.js",
